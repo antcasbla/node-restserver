@@ -1,6 +1,9 @@
 require('./config/config');
 
 const express = require('express')
+// Using Node.js `require()`
+const mongoose = require('mongoose');
+
 const app = express()
 
 const bodyParser = require('body-parser')
@@ -11,41 +14,20 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/usuario', function (req, res) {
-    res.json('get Usuario')
-})
+// Usar los controladores creados en usuario.js
+app.use(require('./controllers/usuario'));
 
-//crear registro nuevo
-app.post('/usuario', function (req, res) {
 
-    let body = req.body;
+//mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
 
-    if(body.nombre === undefined){
-        //CODIGO DE RESPUESTA EN CASO DE ERROR
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    }else{
-        res.json({
-            persona: body
-        })
-    }
-})
+mongoose.connect(process.env.URLDB, (err, res) => {
 
-//actualizar registro
-app.put('/usuario/:id', function (req, res) {
+    if(err) throw err;
 
-    let id = req.params.id;
+    console.log('Base de datos ONLINE');
 
-    res.json({
-        id
-    })
-})
+});
 
-app.delete('/usuario', function (req, res) {
-    res.json('delete Usuario')
-})
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', process.env.PORT);
