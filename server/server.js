@@ -14,8 +14,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+
+// CONFIGURACIÓN GLOBAL DE RUTAS
 // Usar los controladores creados en usuario.js
-app.use(require('./controllers/usuario'));
+//app.use(require('./controllers/usuario'));
+//app.use(require('./controllers/login'));
+//...
+//Hacemos solo una referencia al index.js donde
+// tenemos todos los controllers añadidos
+app.use(require('./controllers/index'));
 
 
 //mongoose.connect('mongodb://localhost:27017/cafe', (err, res) => {
