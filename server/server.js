@@ -4,6 +4,9 @@ const express = require('express')
 // Using Node.js `require()`
 const mongoose = require('mongoose');
 
+//Paquete para crear un path correcto
+const path = require('path');
+
 const app = express()
 
 const bodyParser = require('body-parser')
@@ -14,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
+//habilitar la carpeta public
+app.use(express.static(path.resolve( __dirname , '../public')))
 
 // CONFIGURACIÓN GLOBAL DE RUTAS
 // Usar los controladores creados en usuario.js
