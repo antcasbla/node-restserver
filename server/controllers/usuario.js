@@ -71,9 +71,6 @@ app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
     //Guardado en BDD por Mongoose
     usuario.save((err, usuarioDB) => {
 
-        console.log(err);
-        console.log(usuarioDB);
-
         if(err){
             return res.status(400).json({
                 ok: false,

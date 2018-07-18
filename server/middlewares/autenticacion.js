@@ -1,12 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+let Categoria = require('../models/categoria');
+
 //=====================
 //   VERIFICAR TOKEN
 //=====================
 let verificaToken = (req, res, next) => {
 
     let token = req.get('token'); //Authorization
-
 
     jwt.verify(token, process.env.SEED, (err, decoded) =>{
         if(err){
